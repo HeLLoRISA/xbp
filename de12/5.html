@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <!-- ⑥↓タイトルを変えてみよう -->
+    <title>XBPのページ</title>
+    <!-- ⑤スタイルシートの設定をしよう -->
+    <!-- h1.htmlからある行をコピペしてくればOK -->
+    <link rel="stylesheet" href="./css/style.css">
+
+</head>
+<body>
+    <h1>可能性の探索～WebClass更新の通知～</h1>
+    
+    <div><strong>【考えたこと】</strong><br>
+    WebClassの課題が更新される度にパソコンのデスクトップやメールに通知が来る仕組みがあったらいいなと考えた。<br></div>
+
+    <div><strong>【参考にしたサイト、動画】</strong><br>
+    <a href="https://aiacademy.jp/media/?p=2116" target="_blank">【初心者向け・保存版】PythonでWebスクレイピングしてみよう！</a><br>
+    <a href="https://youtu.be/1-UOksMm0r8" target="_blank" >Pythonで商品再入荷やWebページの更新を自動検知するプログラムの作成</a><br><br> </div>
+    
+    <div><strong>【作成したコード】</strong>
+    <code>
+        <ol style="list-style:decimal-leading-zero outside;in-left:0;padding-left:36px;margin:0;background-color:#EEF;color:#000;">
+        <li style="background-color:#EFF;">from bs4 import BeautifulSoup</li>
+        <li style="background-color:#EEF;">from chardet import detect</li>
+        <li style="background-color:#EFF;">import requests</li>
+        <li style="background-color:#EEF;">from sqlalchemy import false</li>
+        <li style="background-color:#EFF;"></li>
+        <li style="background-color:#EEF;">def detect_updates():</li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;url = <font style="color:brown;">'https://kulms.kanagawa-u.ac.jp/webclass/'</font> #WebClassのURL</li>
+        <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;res = requests.get(url)</li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;soup = BeautifulSoup(res.text,<font style="color:brown;">'html.parser'</font>) #HTMLを解析</li>
+        <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;new_elem=str(soup.select(<font style="color:brown;">'course-contents-info'</font>)) #CSSセレクタ（CSSを指定する際に書く要素の指定の方法）ここでは「締切りが近い課題があります」を指定した</li>
+        <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;</li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;#strを使ってテキストに直している</li>
+        <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;try:                                            </li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with open(<font style="color:brown;">'old_elem.txt'</font>) as f:              #以前に検知したテキストを保存</li>
+        <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;old_elem = f.read()                   </li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;except:</li>
+        <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;old_elem = <font style="color:brown;">''</font></li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;old_elem</li>
+        <li style="background-color:#EEF;"></li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;if new_elem ==old_elem:  #</li>
+        <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<font style="color:brown;">'変化なし'</font>)    </li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return False</li>
+        <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;else:</li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with open(<font style="color:brown;">'old_elem.txt'</font>,<font style="color:brown;">'w'</font>) as f: # w（更新されたらold_elem.textに書き込む）</li>
+        <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.write(new_elem)            </li>
+        <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<font style="color:brown;">'締切りが近い課題があります'</font>)  </li>
+        <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return True</li>
+        <li style="background-color:#EFF;">detect_updates()</li>
+        <li style="background-color:#EEF;"></li>
+        <li style="background-color:#EFF;"></li>
+        </ol></code>
+    </div><br>
+
+    <div><strong>【実行してみると...】</strong><br>
+      プログラムを実行する度、「締切りが近い課題があります」または「変化なし」と表示される仕組みを作りたかった。<br>
+      しかし、 何度試してみても「変化なし」としか表示されず、「締切りが近い課題が近い課題があります」という表示はされなかった。<br>
+      old_elem.textというファイルに以前のテキスト情報を書き込み、新しいテキスト情報と比較するプログラムを書いたつもりだったが、上手く書き込まれていなかった。<br>
+      それが表示の問題の原因だと考えた。
+      
+    </div>
+
+    <div><strong>【定期実行、通知について】</strong><br>
+    私たちが考えたことを実現化するには、プログラムを定期実行し、その結果をラインへ通知するプログラムを作成する必要があるようだったが、今回はその前のステップが上手く行かず、次に進めなかった。<br>
+
+    </div>
+    <div><strong>【定期実行、LINEへの通知の方法】</strong><br>
+    《定期実行》<br>
+    <a href="https://youtu.be/u-qrnpq7OOE">Pythonの定期実行についてわかりやすく解説！</a><br>
+    《LINEへの通知》<br>
+    <a href="https://youtu.be/T0KAE2kq2Xo">メッセージが届く方法をわかりやすく解説！</a>
+        
+</div>
+    </div>
+</body>

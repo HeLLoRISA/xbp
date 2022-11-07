@@ -1,3 +1,5 @@
+import pygame
+
 name=input("名前を教えてください")
 
 month=int(input("何月生まれですか？"))    
