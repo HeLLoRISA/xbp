@@ -73,8 +73,10 @@ image{
 
 }
 
+
+
 .main-nav a {
-    color: black;
+    color:black;
 }
 
 .main-nav a:hover {
@@ -90,6 +92,7 @@ image{
 #de12 .page-title{
     text-align: center;
 }
+
 
 
 /*-----------------*/
