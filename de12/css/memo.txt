@@ -1,0 +1,8 @@
+de12 {
+    background-image: url(https://girlydrop.com/wp-content/uploads/post/p181.jpg);
+    height: 270px; ;
+    margin-bottom: 40px;
+}
+#de12 .page-title{
+    text-align: center;
+}

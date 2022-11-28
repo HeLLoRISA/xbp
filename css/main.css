@@ -38,6 +38,7 @@ image{
 .page-header{
     display: flex;
     justify-content: space-between;
+
 } 
 
 .wrapper{
@@ -82,16 +83,20 @@ image{
 .main-nav a:hover {
     color: #0bd;
 }
+
+.LISA {
+    color: white;
+    
+}
+
+.text{
+      font-family: 'Space Grotesk', sans-serif;
+}
+
+
 /*----------------DE12----------------*/
 
-#de12{
-    background-image: url(https://girlydrop.com/wp-content/uploads/post/p181.jpg);
-    height: 270px; ;
-    margin-bottom: 40px;
-}
-#de12 .page-title{
-    text-align: center;
-}
+
 
 
 
