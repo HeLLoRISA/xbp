@@ -1,0 +1,149 @@
+@charset "UTF-8"; /*CSSコードの文字化けを防ぐ*/
+
+
+/* 冒頭でimport */
+@import url('https://fonts.googleapis.com/css?family=Raleway:700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:400,700&display=swap&subset=japanese');
+/* フォントを指定したところで */
+
+/*=============================ここから本体の設定===============================*/
+
+html {
+    font-size: 100%;  /*設定した文字サイズを正しく反映*/
+}
+body {
+	font-family: 'M PLUS Rounded 1c', sans-serif;
+    list-style: 1.7;
+	color:black;
+    
+}
+
+a {
+    text-decoration: none;
+}
+
+image{
+    max-width: 100%;
+}
+
+/*---------------HEDEAR-------------*/
+.logo {
+    border-radius: 70%;
+    width: 70px;
+    height: 70px;
+    object-fit: cover; /* 画像のトリミング */
+}
+
+
+.page-header{
+    display: flex;
+    justify-content: space-between;
+
+} 
+
+.wrapper{
+    max-width: 1300px; /*横幅の最大値*/
+    margin:  0 auto; /*中央に配置する設定*/
+    padding: 4% ; /*スマホ向けの余白設定*/
+}
+
+/*大きな背景画像*/
+.big-bg {
+    background-size: cover;
+    background-position: center top;
+}
+#home {
+    background-image: url(https://girlydrop.com/wp-content/uploads/post/p8104.jpg);
+    min-height: 100vh;
+}
+
+.page-title{
+    text-transform: none;
+}
+
+
+.main-nav {
+    display: flex;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-top: 34px;
+    list-style: none;
+}
+.main-nav li {
+    margin-left: 36px;
+
+}
+
+
+
+.main-nav a {
+    color:black;
+}
+
+.main-nav a:hover {
+    color: #0bd;
+}
+
+.LISA {
+    color: white;
+    
+}
+
+.text{
+      font-family: 'Space Grotesk', sans-serif;
+}
+
+
+/*----------------DE12----------------*/
+
+
+
+
+
+/*-----------------*/
+
+h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    text-align: center;
+    font-size: 100px;
+    color: black;
+
+    
+}
+
+h2 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    text-align: center;
+    font-size: 50px;
+    color: black;    
+}
+
+h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    text-align: center;
+   
+    color: black;
+    
+}
+h4 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    text-align: center;
+   
+    color: black;
+    
+}
+h5 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    text-align: center;
+    
+    color: black;
+    
+}
+h6 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    text-align: center;
+   
+    color: black;
+    
+} 
+

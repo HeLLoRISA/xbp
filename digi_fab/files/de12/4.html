@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    
+    <title>第４回　ゲーム</title>
+    <!-- ⑤スタイルシートの設定をしよう -->
+    <!-- h1.htmlからある行をコピペしてくればOK -->
+    <link rel="stylesheet" href="./css/style.css">
+
+</head>
+<body>
+    <h1>ゲーム作成</h1>
+    <div><strong>誕生月占い</strong><br>
+自分の名前と誕生月を入力すると、性格を占ってくれるもの<br>
+
+    </div>
+    <div>
+    <div>【ソースコード】</div>
+        <pre><code>
+            name=input("名前を教えてください")
+
+            month=int(input("何月生まれですか？"))    
+            if month==1:
+                    print(name,"さんは優しく温かい性格ですね")
+            if month==2:
+                    print(name,"積極的で活発な性格ですね")
+            if month==3:
+                   print(name,"さんは人当たりが良くて社交性抜群ですね")
+            if month==4:
+                   print(name,"さんは自分に厳しく他人に優しい性格ですね")
+            if month==5:
+                   print(name,"さんは情熱的で抜群の行動力がある人ですね")
+            if month==6:
+                   print(name,"さんは強い好奇心と行動力がある人ですね")
+            if month==7:
+                   print(name,"さんは思いやりがあって優しいひとですね")
+            if month==8:
+                   print(name,"さんは華やかな性格で新しいもの好きですね")
+            if month==9:
+                   print(name,"さんは完璧主義で繊細な心を持っていますね")
+            if month==10:
+                   print(name,"さんは責任感があって真面目な性格ですね")
+            if month==11:
+                   print(name,"さんはマニアックな気質を持っていますね")
+            if month==12:
+                   print(name,"さんは素直でマイペースですね")
+            else:
+                print(name,"さん、正しい誕生月を入力してください")
+            
+        </code></pre>
+    </div>
+    <div><strong>インベーダーゲーム</strong><br>
+    誕生月占いでは新しい知識を身に着けることが出来なかったため、動画に従いながらインベーダーゲームを作成した<br><br>
+
+    【遊び方】<br>
+    プレイを始めるとランダムな位置にに敵が表示され、プレイヤーの方へやってくる<br>
+    プレイヤーは左右の矢印ボタンで動かし、スペースキーで玉を打つ<br>
+    玉が敵に当たればスコアが１プラスされ、敵はスタート位置に戻る<br>
+    敵が玉を避けてプレイヤーのところまで来たら終了<br><br>
+
+    【使用した動画】<br>
+    <a href= https://www.youtube.com/watch?v=fAJ_BjLd3Ro>【Pygame超入門】50分でゲーム開発（Python）の基礎をマスター</a>
+    </div>
+    <div>【ソースコード】</div>
+       <pre><code>
+              from email import message
+              import os
+              from pkgutil import extend_path
+              from tkinter import EXTENDED, Y
+              import pygame
+              from pygame import mixer
+              from sqlalchemy import false #ミキサーをインポート
+              import random
+              import math
+              pygame.init()
+
+              screen = pygame.display.set_mode((800,600))
+              #screen.fill((150,150,150))
+              pygame.display.set_caption('Invaders Game')
+
+              # Player
+              playerimg = pygame.image.load('player.png')
+              playerX , playerY= 370, 480     #座標を変数に入れた
+              playerX_change = 0     #playerの位置
+
+              # Enemy
+              enemyImg = pygame.image.load('enemy.png')
+              enemyX = random.randint(0, 736)
+              enemyY = random.randint(50, 150)
+              enemyX_change, enemyY_change = 4, 40
+
+              # Bullet
+              bulletImg = pygame.image.load('bullet.png')
+              bulletX, bulletY = 0, 480 #Xはプレイヤーと同じ位置
+              bulletX_change, bulletY_change = 0, 3
+              bullet_state = 'ready'
+
+              # Score
+              score_value = 0
+
+              def player(x,y):
+              screen.blit(playerimg,(x, y))
+
+              def enemy(x,y):
+              screen.blit(enemyImg,(x, y))
+
+              def fire_bullet(x, y):
+              global bullet_state
+              bullet_state = 'fire'
+              screen.blit(bulletImg, (x + 16, y + 10)) #玉を表示
+
+              def isCollision(enemyX, enemyY, bulletX, bulletY): #玉とぶつかったかどうか
+              distance = math.sqrt(math.pow(enemyX - bulletX, 2) + math.pow(enemyY - bulletY, 2))
+              if distance < 27:
+                     return True
+              else:
+                     return False
+              
+
+              running = True
+              while running:
+              screen.fill((0,0,0))  
+              for event in pygame.event.get():
+                     if event.type == pygame.QUIT:
+                            running = False
+                     
+                     if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_LEFT:
+                            playerX_change = -1
+                            if event.key == pygame.K_RIGHT:
+                            playerX_change = 1 
+                            if event.key == pygame.K_SPACE:
+                                   if bullet_state is 'ready':
+                                   bulletX = playerX #プレイヤーの場所
+                                   fire_bullet(bulletX, bulletY) #表示
+
+                     if event.type == pygame.KEYUP:
+                            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                                   playerX_change = 0
+              # Player
+              playerX += playerX_change
+              if playerX <= 0:
+                     playerX = 0
+              elif playerX >= 736:
+                     playerX = 736 #プレイヤーの制限
+
+              # Enemy
+              if enemyY > 440:
+                     break #敵が画面下まできたらブレイク
+              enemyX += enemyX_change
+              if enemyX <= 0: #左端に来たら
+                     enemyX_change = 0.3 #プラスされる
+                     enemyY += enemyY_change #下に移している
+              elif enemyX >=736: #右端に来たら
+                     enemyX_change = -0.3 #マイナスされる
+                     enemyY += enemyY_change
+
+              collision = isCollision(enemyX, enemyY, bulletX, bulletY)
+              if collision: #衝突した場合
+                     bulletY = 480
+                     bullet_state = 'ready'
+                     score_value += 1
+                     enemyX = random.randint(0, 736) #新たな敵の出現
+                     enemyY = random.randint(50, 150)
+              
+              # Bullet Movement
+              if bulletY <=0: #玉が当たらなかった場合
+                     bulletY = 480
+                     bullet_state = 'ready'
+
+              if bullet_state is 'fire':
+                     fire_bullet(bulletX, bulletY) #玉を表示
+                     bulletY -= bulletY_change  #値をマイナスにしている
+
+              # Score
+              font = pygame.font.SysFont(None, 32) # フォントの作成　Noneはデフォルトのfreesansbold.ttf
+              score = font.render(f"Score : {str(score_value)}", True, (255,255,255)) # テキストを描画したSurfaceの作成
+              screen.blit(score, (20,50))
+
+
+
+
+              player(playerX, playerY)
+              enemy(enemyX, enemyY)
+              
+              pygame.display.update() #書き換え
+
+              </code></pre>
+<div><strong>【苦戦したところ】</strong><br>
+インベーダーゲームは動画を真似て作ったものだが、それでも画像の読み込みの仕方が分からず３時間以上かかってしまった。<br>
+はじめに、
+<pre><code>playerimg = pygame.image.load('player.png')</code></pre>
+と入力して下のプレイヤー画像(player.png)を表示したかったのだが、入力して実行すると「No file 'player.png' found in working directory 」となってエラーがでてしまった。<br><br>
+
+<img src= "./python/sample.py/player.png" width="10%"><br>
+
+原因１<br>
+       　これは本当に初歩的なミスだが、必要な画像(player.png)をダウンロードしていなかった<br>
+       　この場合、動画の概要欄から用意された画像をダウンロードする必要があった<br><br>
+       
+原因２<br>
+       　画像(player.png)の保存場所が間違っていた<br>
+       　de12フォルダーの中のimagesやpythonのフォルダーに画像を保存したが「file not found」となった<br>
+       　そこで、試しにde12フォルダーのfilesというフォルダーに画像を入れてみたところ、実行することができた<br>
+       　なぜfilesフォルダーに画像を入れる必要があったのかは分からなかった<br>
+
+ </div>
+<div><strong>【改善したいところ】<br></strong>
+       このゲームを友達に試してもらったところ、「スコアが１０になったら終了するプログラムが入れられたらいいね」とアドバイスをもらった。<br>
+       今のプログラムでは敵がプレイヤーのところまで降りてきたら終了となっており、ゲームが上手い人はずっと終わらないからだ。<br>
+</div>
+<div><strong>【感想】</strong><br>
+画像の読み込みにはとても苦戦したが、動画を見ながらやったので楽しんでできた。<br>
+この動画を作ってくれた人に感謝したい。
+しかし、入力についていくのが必死で内容を理解できていない部分も多い。<br>
+今後、改善点は自分でプログラムを考えて入力できるようにしたい。
+</div>

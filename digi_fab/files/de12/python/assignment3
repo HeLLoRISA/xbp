@@ -1,0 +1,37 @@
+from bs4 import BeautifulSoup
+from chardet import detect
+import requests
+from sqlalchemy import false
+
+def detect_updates():
+    url = 'https://kulms.kanagawa-u.ac.jp/webclass/' #WebClassのURL
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text,'html.parser') #HTMLを解析
+    
+    new_elem=str(soup.select('course-contents-info')) #CSSセレクタ（CSSを指定する際に書く要素の指定の方法）ここでは「締切りが近い課題があります」を指定した
+   
+   #strを使ってテキストに直している
+    try:                                            
+        with open('old_elem.txt') as f:              #以前に検知したテキストを保存
+            old_elem = f.read()                   
+    except:
+        old_elem = ''
+    old_elem
+
+    if new_elem ==old_elem:  #
+        print('変化なし')    
+        return False
+    else:
+        with open('old_elem.txt','w') as f: #w 更新されたら書き込む
+            f.write(new_elem)            
+            print('締切りが近い課題があります')  
+            return True
+detect_updates()
+
+
+
+
+
+
+
+
