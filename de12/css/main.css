@@ -53,8 +53,9 @@ image{
     background-position: center top;
 }
 #home {
-    background-image: url(https://girlydrop.com/wp-content/uploads/post/p8104.jpg);
+    background-image: url("");
     min-height: 100vh;
+    
 }
 
 .page-title{
@@ -91,6 +92,20 @@ image{
 
 .text{
       font-family: 'Space Grotesk', sans-serif;
+}
+
+
+/* HOME
+
+----------------------------*/
+.home-content{
+    text-align: center;
+    margin-top: 10% ;
+}
+.home-content p {
+    
+    font-size: 5.0 rem;
+    margin: 10px 0 42px;   
 }
 
 
@@ -146,4 +161,3 @@ h6 {
     color: black;
     
 } 
-
