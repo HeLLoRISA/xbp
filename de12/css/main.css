@@ -92,6 +92,7 @@ image{
 
 .text{
       font-family: 'Space Grotesk', sans-serif;
+    margin-top: 60px;
 }
 
 
@@ -116,6 +117,13 @@ image{
 
 
 /*-----------------*/
+p {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+
+}
 
 h1 {
     font-family: 'M PLUS Rounded 1c', sans-serif;
