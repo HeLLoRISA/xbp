@@ -119,11 +119,12 @@ p{
     font-size: 1.375rem;
     background: #0bd;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 30px;
     padding: 18px 32px;
 }
-.button :hover{
-    background:#afeeee
+.button:hover{
+    background: #fffacd;
+    color:#0bd
 }
 
 /*背景画像*/
@@ -148,3 +149,4 @@ p{
     text-align: center;
     
 }
+
