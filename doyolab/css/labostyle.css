@@ -126,6 +126,20 @@ p{
     background: #fffacd;
     color:#0bd
 }
+.button2 {
+    font-size: 1rem;
+    background: #0bd;
+    color: #fff;
+    border-radius: 30px;
+    padding: 12px 28.5px;
+}
+
+.button2:hover{
+    background: #fffacd;
+    color:#0bd
+}
+    
+
 
 /*背景画像*/
 .big-bg {
