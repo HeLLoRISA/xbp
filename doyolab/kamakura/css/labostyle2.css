@@ -119,27 +119,12 @@ p{
     font-size: 1.375rem;
     background: #0bd;
     color: #fff;
-    border-radius: 30px;
+    border-radius: 5px;
     padding: 18px 32px;
 }
-.button:hover{
-    background: #fffacd;
-    color:#0bd
+.button :hover{
+    background:#afeeee
 }
-.button2 {
-    font-size: 1rem;
-    background: #0bd;
-    color: #fff;
-    border-radius: 30px;
-    padding: 12px 28.5px;
-}
-
-.button2:hover{
-    background: #fffacd;
-    color:#0bd
-}
-    
-
 
 /*背景画像*/
 .big-bg {
@@ -158,10 +143,8 @@ p{
     text-transform: none;
 }
 /*活動内容*/
-/* ====================記録ページの設定==================== */
 
-.midasi{
+.heading {
     text-align: center;
+    
 }
-
-
